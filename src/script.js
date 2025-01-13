@@ -5,21 +5,13 @@ function displayTemperature(response) {
     cityElement.innerHTML = response.data.city;
     temperatureElement.innerHTML = temperature;
   }
-  async function getApiKey() {
-    try {
-      const response = await fetch('/.netlify/functions/getWeatherApiKey'); // Nombre exacto de la función
-      const data = await response.json(); 
-      return data.apiKey;
-    } catch (error) {
-      console.error('Error fetching the API key:', error);
-    }
-  }
-  async function search(event) {
+  
+  function search(event) {
     event.preventDefault();
     let searchInputElement = document.querySelector("#search-input");
     let city = searchInputElement.value;
   
-    const apiKey = await getApiKey(); 
+  let apiKey = "401t83c73f9a5ce923fbbco0d7594958"; 
   console.log("API Key:", apiKey);
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   
