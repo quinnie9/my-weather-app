@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 function displayTemperature(response) {
     let temperatureElement = document.querySelector("#current-temperature");
     let temperature = Math.round(response.data.temperature.current);
@@ -11,7 +13,7 @@ function displayTemperature(response) {
     let searchInputElement = document.querySelector("#search-input");
     let city = searchInputElement.value;
   
-  let apiKey = process.env.REACT_APP_WEATHER_API_KEY; 
+ const apiKey = process.env.REACT_APP_WEATHER_API_KEY; 
   console.log("API Key:", apiKey);
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   
