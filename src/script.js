@@ -17,6 +17,7 @@ function displayTemperature(response) {
     windspeedElement.innerHTML = `${response.data.wind.speed} km/h`;
     currentDateELement.innerHTML = formatDate(date);
     iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+    getForecast(response.data.city);
     
     console.log(response.data)
     }
@@ -52,6 +53,7 @@ function displayTemperature(response) {
     return `${formattedDay} ${hours}:${minutes},`;
   }
   
+  
   function search(event) {
     event.preventDefault();
     let searchInputElement = document.querySelector("#search-input");
@@ -62,11 +64,22 @@ function displayTemperature(response) {
     axios.get(apiUrl).then(displayTemperature);
   }
 
-  function handleSearch(event) {
-    event.preventDefault();
-    let searchInputElement = document.querySelector("#search-input");
-    search(searchInputElement.value);
-}
+  function getCurrentLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let apiKey = "401t83c73f9a5ce923fbbco0d7594958";
+        let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(displayTemperature);
+      }, () => {
+        alert("Oops! We couldn't get your current location 😅. Try again or search for your city 🔎");
+      });
+    } else {
+      alert("Your browser doesn't allow Geolocation tracking 😮‍💨.");
+    }
+  }
+
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
@@ -76,7 +89,7 @@ function formatDay(timestamp) {
 }
 
 function getForecast(city) {
-  let apiKey = "401t83c73f9a5ce923fbbco0d7594958";
+  let apiKey = "b2a5adcct04b33178913oc335f405433";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios(apiUrl).then(displayForecast);
 }
@@ -110,23 +123,8 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHtml;
 }
 
-function getCurrentLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      let apiKey = "401t83c73f9a5ce923fbbco0d7594958";
-      let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric`;
-      axios.get(apiUrl).then(displayTemperature);
-    }, () => {
-      alert("Oops! We couldn't get your current location 😅. Try again or search for your city 🔎");
-    });
-  } else {
-    alert("Your browser doesn't allow Geolocation tracking 😮‍💨.");
-  }
-}
-
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", search);
+
 getCurrentLocation();
 
