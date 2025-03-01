@@ -8,16 +8,18 @@ function displayTemperature(response) {
     let currentDateELement = document.querySelector("#current-date");
     let date = new Date(response.data.time * 1000);
     let description = response.data.condition.description; 
-
+    let iconElement = document.querySelector("#icon");
+    
     cityElement.innerHTML = response.data.city;
     descriptionElement.innerHTML = capitalizeEachWord(description)
     temperatureElement.innerHTML = temperature;
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windspeedElement.innerHTML = `${response.data.wind.speed} km/h`;
     currentDateELement.innerHTML = formatDate(date);
-
+    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
     console.log(date)
     console.log(response.data)
+    console.log(iconElement)
   }
   
   function capitalizeEachWord(sentence) {
@@ -63,7 +65,31 @@ function displayTemperature(response) {
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayTemperature);
   }
+
+  function handleSearch(event) {
+    event.preventDefault();
+    let searchInputElement = document.querySelector("#search-input");
+    search(searchInputElement.value);
+}
   
   let searchFormElement = document.querySelector("#search-form");
   searchFormElement.addEventListener("submit", search);
+
+  function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            let lat = position.coords.latitude;
+            let lon = position.coords.longitude;
+            let apiKey = "401t83c73f9a5ce923fbbco0d7594958";
+            let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric`;
+            axios.get(apiUrl).then(displayTemperature);
+        }, () => {
+            alert("No se pudo obtener tu ubicación. Activa la geolocalización o busca manualmente.");
+        });
+    } else {
+        alert("Tu navegador no soporta geolocalización.");
+    }
+}
+
+getCurrentLocation();
 
