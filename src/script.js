@@ -84,10 +84,10 @@ function displayTemperature(response) {
             let apiUrl = `https://api.shecodes.io/weather/v1/current?lat=${lat}&lon=${lon}&key=${apiKey}&units=metric`;
             axios.get(apiUrl).then(displayTemperature);
         }, () => {
-            alert("No se pudo obtener tu ubicación. Activa la geolocalización o busca manualmente.");
+            alert("Oops! We couldn't get your current location 😅. Try again or search for your city 🔎");
         });
     } else {
-        alert("Tu navegador no soporta geolocalización.");
+        alert("Your browser doesn't allow Geolocation tracking 😮‍💨.");
     }
 }
 
