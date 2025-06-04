@@ -10,7 +10,7 @@ function displayTemperature(response) {
     let description = response.data.condition.description; 
     let iconElement = document.querySelector("#icon");
     
-    cityElement.innerHTML = response.data.city;
+    cityElement.innerHTML = `${response.data.city}, ${response.data.country}`;
     descriptionElement.innerHTML = capitalizeEachWord(description)
     temperatureElement.innerHTML = temperature;
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
@@ -86,7 +86,7 @@ function displayTemperature(response) {
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sats"];
 
   return days[date.getDay()];
 }

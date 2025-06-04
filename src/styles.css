@@ -50,7 +50,7 @@ body {
   }
   
   .current-temperature {
-    font-size: 48px;
+    font-size: 48px;;
   }
   
   .current-weather {
@@ -60,7 +60,7 @@ body {
   
   .current-city {
     font-size: 38px;
-    font-weight: 900;
+    font-weight: 600;
     margin: 0;
   }
   .current-details {
@@ -75,15 +75,15 @@ body {
   }
   
   .current-temperature-icon {
-    position: relative;
     top: -8px;
-    font-size: 40px;
     margin-right: 10px;
+    margin-bottom: 0px;
   }
   
   .current-temperature-value {
     font-size: 80px;
     font-weight: bold;
+    margin-bottom: 10px;
   }
   
   .current-temperature-unit {
@@ -105,6 +105,7 @@ body {
   align-items: center;
   padding: 10px 0;
   border-bottom: 1px solid #f1eff5;
+  opacity: 0.8;
 }
 
 .weather-forecast-date {
