@@ -88,7 +88,47 @@ body {
     position: relative;
     top: -38px;
   }
-  
+
+  .weather-forecast {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.weather-forecast-day {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1eff5;
+}
+
+.weather-forecast-date {
+  font-size: 24px;
+  color: #272142;
+}
+
+.weather-forecast-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 20px;
+}
+
+.weather-forecast-temperatures {
+  display: flex;
+  gap: 6px;
+  font-size: 24px;
+  color: #272142;
+  min-width: 70px;
+  justify-content: flex-start;
+}
+
+.weather-forecast-temperature:last-child {
+  color: rgba(39, 33, 66, 0.5);
+}
+
+
   footer {
     border-top: 1px solid #f9f7fe;
     text-align: center;
