@@ -131,7 +131,7 @@ searchFormElement.addEventListener("submit", search);
 
 function setBackgroundImage(city) {
   let unsplashAccessKey = "nfe6sMVUi1cy6M6fD_3k-jcs6xPe0sNlCdmrHOvTKyQ";
-  let UnSplashAPIurl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${unsplashAccessKey}&orientation=landscape&color=blue`;
+  let UnSplashAPIurl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${unsplashAccessKey}&orientation=landscape`;
 
   axios.get(UnSplashAPIurl)
     .then(response => {
