@@ -19,6 +19,9 @@ function displayTemperature(response) {
     iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
     getForecast(response.data.city);
     
+    setBackgroundImage(response.data.city); // <-- Aquí inyectamos la imagen de fondo dinámica
+
+
     console.log(response.data)
     }
   
@@ -125,6 +128,28 @@ function displayForecast(response) {
 
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", search);
+
+function setBackgroundImage(city) {
+  let unsplashAccessKey = "nfe6sMVUi1cy6M6fD_3k-jcs6xPe0sNlCdmrHOvTKyQ";
+  let UnSplashAPIurl = `https://api.unsplash.com/search/photos?query=${city}&client_id=${unsplashAccessKey}&orientation=landscape&color=blue`;
+
+  axios.get(UnSplashAPIurl)
+    .then(response => {
+      if (response.data.results.length > 0) {
+        let imageUrl = response.data.results[2].urls.full;
+        document.body.style.backgroundImage = `url(${imageUrl})`;
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundPosition = 'center center';
+        document.body.style.backgroundRepeat = 'no-repeat';
+      } else {
+        document.body.style.backgroundImage = '';
+      }
+    })
+    .catch(error => {
+      console.error("Error loading image:", error);
+      document.body.style.backgroundImage = '';
+    });
+}
 
 getCurrentLocation();
 
