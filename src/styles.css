@@ -1,5 +1,7 @@
 body {
-    background: #f9f7fe;
+  width: 100vw;
+  height: 100vh;  
+  background: #f9f7fe;
     font-family: "Roboto", sans-serif;
   }
   
